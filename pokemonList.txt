@@ -1,0 +1,151 @@
+1;Bulbasaur;Planta;Veneno;Monstruo;Planta;2
+2;Ivysaur;Planta;Veneno;Monstruo;Planta;3
+3;Venusaur;Planta;Veneno;Monstruo;Planta;-1
+4;Charmander;Fuego;;Monstruo;Dragon;5
+5;Charmeleon;Fuego;;Monstruo;Dragon;6
+6;Charizard;Fuego;Volador;Monstruo;Dragon;-1
+7;Squirtle;Agua;;Monstruo;Agua 1;8
+8;Wartortle;Agua;;Monstruo;Agua 1;9
+9;Blastoise;Agua;;Monstruo;Agua 1;-1
+10;Caterpie;Bicho;;Bicho;;11
+11;Metapod;Bicho;;Bicho;;12
+12;Butterfree;Bicho;Volador;Bicho;;-1
+13;Weedle;Bicho;Veneno;Bicho;;14
+14;Kakuna;Bicho;Veneno;Bicho;;15
+15;Beedrill;Bicho;Veneno;Bicho;;-1
+16;Pidgey;Normal;Volador;Volador;;17
+17;Pidgeotto;Normal;Volador;Volador;;18
+18;Pidgeot;Normal;Volador;Volador;;-1
+19;Rattata;Normal;;Campo;;20
+20;Raticate;Normal;;Campo;;-1
+21;Spearow;Normal;Volador;Volador;;22
+22;Fearow;Normal;Volador;Volador;;-1
+23;Ekans;Veneno;;Campo;Dragon;24
+24;Arbok;Veneno;;Campo;Dragon;-1
+25;Pikachu;Electrico;;Campo;Hada;26
+26;Raichu;Electrico;;Campo;Hada;-1
+27;Sandshrew;Tierra;;Campo;;28
+28;Sandslash;Tierra;;Campo;;-1
+29;Nidoran#;Veneno;;Monstruo;Campo;30
+30;Nidorina;Veneno;;Ninguno;;31
+31;Nidoqueen;Veneno;Tierra;Ninguno;;-1
+32;Nidoran_;Veneno;;Monstruo;Campo;33
+33;Nidorino;Veneno;;Monstruo;Campo;34
+34;Nidoking;Veneno;Tierra;Monstruo;Campo;-1
+35;Clefairy;Hada;;Hada;;36
+36;Clefable;Hada;;Hada;;-1
+37;Vulpix;Fuego;;Campo;;38
+38;Ninetales;Fuego;;Campo;;-1
+39;Jigglypuff;Normal;hada;Hada;;40
+40;Wigglytuff;Normal;hada;Hada;;-1
+41;Zubat;Veneno;Volador;Volador;;42
+42;Golbat;Veneno;Volador;Volador;;-1
+43;Oddish;Planta;Veneno;Planta;;44
+44;Gloom;Planta;Veneno;Planta;;45
+45;Vileplume;Planta;Veneno;Planta;;-1
+46;Paras;Bicho;Planta;Bicho;Planta;47
+47;Parasect;Bicho;Planta;Bicho;Planta;-1
+48;Venonat;Bicho;Veneno;Bicho;;49
+49;Venomoth;Bicho;Veneno;Bicho;;-1
+50;Diglett;Tierra;;Campo;;51
+51;Dugtrio;Tierra;;Campo;;-1
+52;Meowth;Normal;;Campo;;53
+53;Persian;Normal;;Campo;;-1
+54;Psyduck;Agua;;Agua 1;Campo;55
+55;Golduck;Agua;;Agua 1;Campo;-1
+56;Mankey;Lucha;;Campo;;57
+57;Primeape;Lucha;;Campo;;-1
+58;Growlithe;Fuego;;Campo;;59
+59;Arcanine;Fuego;;Campo;;-1
+60;Poliwag;Agua;;Agua 1;;-1
+61;Poliwhirl;Agua;;Agua 1;;61
+62;Poliwrath;Agua;Lucha;Agua 1;;62
+63;Abra;Psiquico;;Humanoide;;64
+64;Kadabra;Psiquico;;Humanoide;;65
+65;Alakazam;Psiquico;;Humanoide;;-1
+66;Machop;Lucha;;Humanoide;;67
+67;Machoke;Lucha;;Humanoide;;68
+68;Machamp;Lucha;;Humanoide;;-1
+69;Bellsprout;Planta;Veneno;Planta;;70
+70;Weepinbell;Planta;Veneno;Planta;;71
+71;Victreebel;Planta;Veneno;Planta;;-1
+72;Tentacool;Agua;Veneno;Agua 3;;72
+73;Tentacruel;Agua;Veneno;Agua 3;;-1
+74;Geodude;Roca;Tierra;Mineral;;75
+75;Graveler;Roca;Tierra;Mineral;;76
+76;Golem;Roca;Tierra;Mineral;;-1
+77;Ponyta;Fuego;;Campo;;78
+78;Rapidash;Fuego;;Campo;;-1
+79;Slowpoke;Agua;Psiquico;Monstruo;Agua 1;80
+80;Slowbro;Agua;Psiquico;Monstruo;Agua 1;-1
+81;Magnemite;Electrico;Acero;Mineral;;82
+82;Magneton;Electrico;Acero;Mineral;;-1
+83;Farfetch'd;Normal;Volador;Volador;Campo;-1
+84;Doduo;Normal;Volador;Volador;;85
+85;Dodrio;Normal;Volador;Volador;;-1
+86;Seel;Agua;;Agua 1;Campo;86
+87;Dewgong;Agua;Hielo;Agua 1;Campo;-1
+88;Grimer;Veneno;;Amorfo;;89
+89;Muk;Veneno;;Amorfo;;-1
+90;Shellder;Agua;;Agua 3;;91
+91;Cloyster;Agua;Hielo;Agua 3;;-1
+92;Gastly;Fantasma;Veneno;Amorfo;;93
+93;Haunter;Fantasma;Veneno;Amorfo;;94
+94;Gengar;Fantasma;Veneno;Amorfo;;-1
+95;Onix;Roca;Tierra;Mineral;;-1
+96;Drowzee;Psiquico;;Humanoide;;97
+97;Hypno;Psiquico;;Humanoide;;-1
+98;Krabby;Agua;;Agua 3;;99
+99;Kingler;Agua;;Agua 3;;-1
+100;Voltorb;Electrico;;Mineral;;101
+101;Electrode;Electrico;;Mineral;;-1
+102;Exeggcute;Planta;Psiquico;Planta;;103
+103;Exeggutor;Planta;Psiquico;Planta;;-1
+104;Cubone;Tierra;;Monstruo;;105
+105;Marowak;Tierra;;Monstruo;;-1
+106;Hitmonlee;Lucha;;Humanoide;;107
+107;Hitmonchan;Lucha;;Humanoide;;-1
+108;Lickitung;Normal;;Monstruo;;-1
+109;Koffing;Veneno;;Amorfo;;109
+110;Weezing;Veneno;;Amorfo;;-1
+111;Rhyhorn;Tierra;Roca;Monstruo;Campo;112
+112;Rhydon;Tierra;Roca;Monstruo;Campo;-1
+113;Chansey;Normal;;Hada;;-1
+114;Tangela;Planta;;Planta;;-1
+115;Kangaskhan;Normal;;Monstruo;;-1
+116;Horsea;Agua;;Agua 1;Dragon;117
+117;Seadra;Agua;;Agua 1;Dragon;-1
+118;Goldeen;Agua;;Agua 2;;119
+119;Seaking;Agua;;Agua 2;;-1
+120;Staryu;Agua;;Agua 3;;121
+121;Starmie;Agua;Psiquico;Agua 3;;-1
+122;Mr. Mime;Psiquico;Hada;Humanoide;;-1
+123;Scyther;Bicho;Volador;Bicho;;-1
+124;Jynx;Hielo;Psiquico;Humanoide;;-1
+125;Electabuzz;Electrico;;Humanoide;;-1
+126;Magmar;Fuego;;Humanoide;;-1
+127;Pinsir;Bicho;;Bicho;;-1
+128;Tauros;Normal;;Campo;;-1
+129;Magikarp;Agua;;Agua 2;Dragon;130
+130;Gyarados;Agua;Volador;Agua 2;Dragon;-1
+131;Lapras;Agua;Hielo;Monstruo;Agua 1;-1
+132;Ditto;Normal;;Ditto;;-1
+133;Eevee;Normal;;Campo;;0
+134;Vaporeon;Agua;;Campo;;-1
+135;Jolteon;Electrico;;Campo;;-1
+136;Flareon;Fuego;;Campo;;-1
+137;Porygon;Normal;;Mineral;;-1
+138;Omanyte;Roca;Agua;Agua 1;Agua 3;139
+139;Omastar;Roca;Agua;Agua 1;Agua 3;-1
+140;Kabuto;Roca;Agua;Agua 1;Agua 3;141
+141;Kabutops;Roca;Agua;Agua 1;Agua 3;-1
+142;Aerodactyl;Roca;Volador;Volador;;-1
+143;Snorlax;Normal;;Monstruo;;-1
+144;Articuno;Hielo;Volador;Ninguno;;-1
+145;Zapdos;Electrico;Volador;Ninguno;;-1
+146;Moltres;Fuego;Volador;Ninguno;;-1
+147;Dratini;Dragon;;Agua 1;Dragon;148
+148;Dragonair;Dragon;;Agua 1;Dragon;149
+149;Dragonite;Dragon;Volador;Agua 1;Dragon;-1
+150;Mewtwo;Psiquico;;Ninguno;;-1
+151;Mew;Psiquico;;Ninguno;;-1
