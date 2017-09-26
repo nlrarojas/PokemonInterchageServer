@@ -130,6 +130,7 @@ public class PlayerXMLData implements IConstants {
     }//getPlayers
 
     public void updatePokedex(int coachNumber, Pokemon[] pokedex) {
+        System.out.println("Update pokedex");
         List listaElementos = this.root.getChildren();
         int i = 0;
 
@@ -159,6 +160,7 @@ public class PlayerXMLData implements IConstants {
         }//for
         try {
             saveXML();
+            System.out.println("Pokedex salvado");
         } catch (IOException ex) {
             Logger.getLogger(PlayerXMLData.class.getName()).log(Level.SEVERE, null, ex);
         }

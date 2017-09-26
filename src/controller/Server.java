@@ -14,6 +14,7 @@ import java.io.ObjectOutputStream;
 import java.io.PrintStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.jdom.JDOMException;
@@ -24,12 +25,14 @@ public class Server extends Thread implements IConstants {
     private PokemonXMLBusiness pokemonBusiness;
     private PlayerManager playerManager;
     private PlayerXMLBusiness playerBusiness;
+    private InterchangeController interchangeController;
     
     public Server() {
         super("Server Thread");
         try {
             this.pokemonBusiness = new PokemonXMLBusiness();
             this.playerBusiness = new PlayerXMLBusiness();
+            this.interchangeController = new InterchangeController(playerBusiness);
         } catch (JDOMException | IOException ex) {
             System.err.println(ex.getMessage());
         }
@@ -40,7 +43,8 @@ public class Server extends Thread implements IConstants {
         try {
             ServerSocket serverSocket = new ServerSocket(PORT);
             System.out.println("Iniciado");
-            createPrincipalFile();
+            createPrincipalFile();                      
+                
             do {
                 Socket socket = serverSocket.accept();
 
@@ -51,8 +55,8 @@ public class Server extends Thread implements IConstants {
                 enviar.println("Este es el servidor (Intercambio de Pokemones)");//primer output
                 enviar.println(SERVER_READY);// segundo output
 
-                System.out.println("Cliente solicita la función: " + funcionString);
-
+                System.out.println("\nCliente solicita la función: " + funcionString);
+                
                 if (funcionString.equalsIgnoreCase(CREATE_NEW_PLAYER)) {
                     createNewPlayer(socket);
                 } else if (funcionString.equalsIgnoreCase(LOAD_EXISTING_PLAYER)){
@@ -61,12 +65,21 @@ public class Server extends Thread implements IConstants {
                 } else if (funcionString.equalsIgnoreCase(LOAD_FOREIGN_PLAYER)) {
                     int coachNumber = Integer.parseInt(recibir.readLine());
                     loadPlayer(socket, coachNumber);
+                } else if (funcionString.equalsIgnoreCase(LOG_OUT)){
+                    try {
+                        int coachNumber = Integer.parseInt(recibir.readLine());
+                        logOutPlayer(socket, coachNumber);
+                    } catch (SocketException se){
+                        System.out.println("Conección cerrada antes de tiempo");
+                    }
+                } else if (funcionString.equalsIgnoreCase(TRADE_POKEMONS)){
+                    tradePokemons(socket);
                 }
                 socket.close();
             } while (true);
-        } catch (IOException | JDOMException ex) {
-            System.out.println(ex.getMessage());
-        }
+        } catch (IOException | ClassNotFoundException | JDOMException ex) {
+            Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
+        } 
     }//run
 
     private void createNewPlayer(Socket socket) throws IOException, JDOMException {
@@ -79,20 +92,54 @@ public class Server extends Thread implements IConstants {
         System.out.println("CoachNumber: " + newPlayer.getCoachNumber());
     }//funcionCreateNewPlayer
     
-    private void loadPlayer(Socket socket, int coachNumber) throws IOException, JDOMException {
-        System.out.println("Tara");        
+    private void loadPlayer(Socket socket, int coachNumber) throws IOException, JDOMException {        
         ObjectOutputStream objectOut = new ObjectOutputStream(socket.getOutputStream());
-        int validation = playerBusiness.validatePlayerExists(coachNumber);
-        Player player = null;
+        int validation = playerBusiness.validatePlayerExists(coachNumber);        
         if (validation != -1){
-            System.out.println("Validación coach: " + validation);
-            player = playerBusiness.getPlayers().get(validation);
+            Player player = playerBusiness.getPlayers().get(validation);            
             System.out.println("CoachNumber: " + player.getCoachNumber());
+            objectOut.writeObject(player);
+            System.out.println("Validación coach: " + validation);                        
         }else{
+            objectOut.writeObject(false);
             System.out.println("CoachNumber: no existe el entrenador indicado");
-        }
-        objectOut.writeObject(player);        
+        }                
     }    
+    
+    private void logOutPlayer(Socket socket, int coachNumber) throws IOException, ClassNotFoundException {
+        ObjectInputStream objectIn = new ObjectInputStream(socket.getInputStream());
+        Player player = (Player) objectIn.readObject();
+        playerBusiness.updatePokedex(player.getCoachNumber(), player.getPokedex());
+        System.out.println(player.getCoachNumber());
+        //Salvar el estado del jugador
+        //
+        //
+        //
+        //
+        //
+    }
+    
+    private void tradePokemons(Socket socket) throws IOException, ClassNotFoundException {
+        System.out.println("Recibiendo información");
+        ObjectInputStream objectIn = new ObjectInputStream(socket.getInputStream());
+        Player originCoach = (Player) objectIn.readObject();
+        Player foreignCoach = (Player) objectIn.readObject();
+        
+        Pokemon originPokemon = (Pokemon) objectIn.readObject();
+        Pokemon foreignPokemon = (Pokemon) objectIn.readObject();
+             
+        interchangeController.tradePokemons(originPokemon, foreignPokemon, originCoach.getCoachNumber(), foreignCoach.getCoachNumber()); 
+        
+        System.out.println(playerBusiness.getPlayers().get(0).getCoachNumber());
+                for (int j = 0; j < playerBusiness.getPlayers().get(0).getPokedex().length; j++) {
+                    System.out.println(playerBusiness.getPlayers().get(0).getPokedex()[j].getName());
+                }
+          
+            System.out.println(playerBusiness.getPlayers().get(1).getCoachNumber());
+                for (int j = 0; j < playerBusiness.getPlayers().get(1).getPokedex().length; j++) {
+                    System.out.println(playerBusiness.getPlayers().get(1).getPokedex()[j].getName());
+                }
+    }
     
     private void log(String msg) {
         System.out.println(msg);
@@ -125,5 +172,5 @@ public class Server extends Thread implements IConstants {
             }
         }
         return true;
-    }
+    }   
 }

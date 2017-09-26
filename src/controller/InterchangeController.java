@@ -3,11 +3,7 @@ package controller;
 import Domain.Player;
 import Domain.Pokemon;
 import business.PlayerXMLBusiness;
-import java.io.IOException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.jdom.JDOMException;
 
 /**
  *
@@ -19,14 +15,10 @@ public class InterchangeController {
     private PlayerXMLBusiness playerBusiness;
     private int playerIndex;
     
-    public InterchangeController() {
-        try {
-            this.playerBusiness = new PlayerXMLBusiness();
-            this.players = playerBusiness.getPlayers();
-            this.playerIndex = 0;
-        } catch (JDOMException | IOException ex) {
-            System.err.println(ex.getMessage());
-        }
+    public InterchangeController(PlayerXMLBusiness pPlayerBusiness) {
+        this.playerBusiness = pPlayerBusiness;
+        this.players = playerBusiness.getPlayers();
+        this.playerIndex = 0;
     }
     
     public void tradePokemons (Pokemon pokemon1, Pokemon pokemon2, int originCoachNumber, int forwardCoachNumber){       
@@ -35,8 +27,10 @@ public class InterchangeController {
     }
     
     public void tradePokemonsKernel (Pokemon pokemon1, Pokemon pokemon2, int originCoachNumber, int forwardCoachNumber){       
-        Player forwardPlayer = getPlayer(forwardCoachNumber);
+        Player forwardPlayer = getPlayer(forwardCoachNumber);        
+        System.out.println("Intercambio pokemon");
         if(forwardPlayer != null){
+            System.out.println("Intercambiando pokemon de: " + forwardPlayer.getCoachNumber());
             Pokemon [] forwardPlayerPokedex = forwardPlayer.getPokedex();
             for (int i = 0; i < forwardPlayerPokedex.length; i++) {
                 if (forwardPlayerPokedex[i].getNumber() == pokemon1.getNumber()){
@@ -54,10 +48,10 @@ public class InterchangeController {
     public Player getPlayer(int coachNumber){
         this.playerIndex = 0;
         for (Player player : players){
-            playerIndex++;
             if (player.getCoachNumber() == coachNumber){
                 return player;
             }
+            playerIndex++;
         }
         return null;
     }

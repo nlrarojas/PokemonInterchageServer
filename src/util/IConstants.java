@@ -40,4 +40,6 @@ public interface IConstants {
     public static String SERVER_READY = "listo";
     public static String LOAD_EXISTING_PLAYER = "loadPlayer";
     public static String LOAD_FOREIGN_PLAYER = "loadForeignPlayer";
+    public static String LOG_OUT = "logOut";
+    public static String TRADE_POKEMONS = "tradePokemons";
 }
