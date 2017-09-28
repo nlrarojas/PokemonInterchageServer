@@ -1,6 +1,7 @@
 package data;
 
-import Domain.*;
+import domain.Pokemon;
+import domain.Player;
 import java.io.*;
 import java.util.*;
 import java.util.logging.Level;

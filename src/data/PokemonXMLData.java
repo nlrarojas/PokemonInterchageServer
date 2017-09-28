@@ -1,6 +1,6 @@
-package data;
+    package data;
 
-import Domain.Pokemon;
+import domain.Pokemon;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;

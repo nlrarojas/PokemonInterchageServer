@@ -1,15 +1,14 @@
 package controller;
 
 import Business.PokemonXMLBusiness;
-import Domain.Player;
-import Domain.Pokemon;
+import domain.Player;
+import domain.Pokemon;
 import business.PlayerXMLBusiness;
 import java.io.IOException;
 import java.util.List;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.jdom.JDOMException;
 import util.IConstants;
 
 /**

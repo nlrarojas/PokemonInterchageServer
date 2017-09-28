@@ -1,8 +1,8 @@
 package controller;
 
 import Business.PokemonXMLBusiness;
-import Domain.Player;
-import Domain.Pokemon;
+import domain.Player;
+import domain.Pokemon;
 import business.PlayerXMLBusiness;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -12,6 +12,7 @@ import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintStream;
+import java.io.StreamCorruptedException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
@@ -69,7 +70,7 @@ public class Server extends Thread implements IConstants {
                     try {
                         int coachNumber = Integer.parseInt(recibir.readLine());
                         logOutPlayer(socket, coachNumber);
-                    } catch (SocketException se){
+                    } catch (NumberFormatException | ClassNotFoundException | StreamCorruptedException | SocketException se){
                         System.out.println("Conección cerrada antes de tiempo");
                     }
                 } else if (funcionString.equalsIgnoreCase(TRADE_POKEMONS)){
@@ -130,19 +131,18 @@ public class Server extends Thread implements IConstants {
              
         interchangeController.tradePokemons(originPokemon, foreignPokemon, originCoach.getCoachNumber(), foreignCoach.getCoachNumber()); 
         
-        System.out.println(playerBusiness.getPlayers().get(0).getCoachNumber());
-                for (int j = 0; j < playerBusiness.getPlayers().get(0).getPokedex().length; j++) {
-                    System.out.println(playerBusiness.getPlayers().get(0).getPokedex()[j].getName());
-                }
-          
-            System.out.println(playerBusiness.getPlayers().get(1).getCoachNumber());
-                for (int j = 0; j < playerBusiness.getPlayers().get(1).getPokedex().length; j++) {
-                    System.out.println(playerBusiness.getPlayers().get(1).getPokedex()[j].getName());
-                }
+        ObjectOutputStream objectOut = new ObjectOutputStream(socket.getOutputStream());
+        objectOut.writeObject(getPlayerByIndex(originCoach.getCoachNumber()));
+        objectOut.writeObject(getPlayerByIndex(foreignCoach.getCoachNumber()));
     }
     
-    private void log(String msg) {
-        System.out.println(msg);
+    public Player getPlayerByIndex (int coachNumber){
+        for (Player player : playerBusiness.getPlayers()) {
+            if (player.getCoachNumber() == coachNumber){
+                return player;
+            }
+        }
+        return null;
     }
 
     public boolean createPrincipalFile() {

@@ -1,7 +1,7 @@
 package controller;
 
-import Domain.Player;
-import Domain.Pokemon;
+import domain.Player;
+import domain.Pokemon;
 import business.PlayerXMLBusiness;
 import java.util.List;
 
@@ -29,19 +29,20 @@ public class InterchangeController {
     public void tradePokemonsKernel (Pokemon pokemon1, Pokemon pokemon2, int originCoachNumber, int forwardCoachNumber){       
         Player forwardPlayer = getPlayer(forwardCoachNumber);        
         System.out.println("Intercambio pokemon");
+                
         if(forwardPlayer != null){
-            System.out.println("Intercambiando pokemon de: " + forwardPlayer.getCoachNumber());
             Pokemon [] forwardPlayerPokedex = forwardPlayer.getPokedex();
             for (int i = 0; i < forwardPlayerPokedex.length; i++) {
-                if (forwardPlayerPokedex[i].getNumber() == pokemon1.getNumber()){
+                if (forwardPlayerPokedex[i].getNumber() == pokemon2.getNumber()){
+                    System.out.println("Pokemon encontrado");
                     pokemon2.setCoach(forwardCoachNumber);
-                    forwardPlayerPokedex[i] = pokemon2;
+                    forwardPlayerPokedex[i] = pokemon1;
                     break;
                 }
             }
             forwardPlayer.setPokedex(forwardPlayerPokedex);
-            playerBusiness.updatePokedex(forwardCoachNumber, forwardPlayer.getPokedex());
             players.set(playerIndex, forwardPlayer);
+            playerBusiness.updatePokedex(forwardCoachNumber, forwardPlayer.getPokedex());            
         }
     }
     

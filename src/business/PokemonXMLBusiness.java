@@ -1,7 +1,7 @@
 package Business;
 
 import data.PokemonXMLData;
-import Domain.Pokemon;
+import domain.Pokemon;
 import java.io.IOException;
 import java.util.List;
 import org.jdom.JDOMException;
