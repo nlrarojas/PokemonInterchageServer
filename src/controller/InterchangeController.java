@@ -46,6 +46,23 @@ public class InterchangeController {
         }
     }
     
+    public void updateEvolution(Pokemon pokemon, Pokemon pokemonEvolution, int coachNumber) {
+        Player player = getPlayer(coachNumber);
+        
+        if (player != null) {
+            Pokemon [] pokedex = player.getPokedex();
+            for (int i = 0; i < pokedex.length; i++) {                            
+                if (pokedex[i].getNumber() == pokemon.getNumber()){
+                    pokedex[i] = pokemonEvolution;
+                    break;
+                }
+            }
+            player.setPokedex(pokedex);
+            players.set(playerIndex, player);
+            playerBusiness.updatePokedex(coachNumber, player.getPokedex());
+        }
+    }
+    
     public Player getPlayer(int coachNumber){
         this.playerIndex = 0;
         for (Player player : players){
@@ -55,5 +72,5 @@ public class InterchangeController {
             playerIndex++;
         }
         return null;
-    }
+    }   
 }

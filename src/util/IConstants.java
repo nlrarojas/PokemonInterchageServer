@@ -42,4 +42,6 @@ public interface IConstants {
     public static String LOAD_FOREIGN_PLAYER = "loadForeignPlayer";
     public static String LOG_OUT = "logOut";
     public static String TRADE_POKEMONS = "tradePokemons";
+    public static String POKEMON_EVOLUTION = "evolution";
+    public static String UPDATE_POKEDEX = "updatePokemonEvolution";
 }

@@ -35,7 +35,7 @@ public class PlayerManager implements IConstants{
         }
     }
     
-    public void generatePokedex() throws IOException{        
+    private void generatePokedex() throws IOException{        
         for (int i = 0; i < AMOUNT_OF_POKEMONS; i++) {
             Pokemon newPokemon = pokemonList.get(random.nextInt(151));
             newPokemon.setOriginalCoach(player.getCoachNumber());

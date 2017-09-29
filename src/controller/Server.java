@@ -75,6 +75,12 @@ public class Server extends Thread implements IConstants {
                     }
                 } else if (funcionString.equalsIgnoreCase(TRADE_POKEMONS)){
                     tradePokemons(socket);
+                } else if (funcionString.equalsIgnoreCase(POKEMON_EVOLUTION)){
+                    int pokemonNumber = Integer.parseInt(recibir.readLine());
+                    getNextEvolutionForPokemon(socket, pokemonNumber);
+                } else if (funcionString.equalsIgnoreCase(UPDATE_POKEDEX)){
+                    int coachNumber = Integer.parseInt(recibir.readLine());
+                    updatePokedexForCoach(socket, coachNumber);
                 }
                 socket.close();
             } while (true);
@@ -136,10 +142,33 @@ public class Server extends Thread implements IConstants {
         objectOut.writeObject(getPlayerByIndex(foreignCoach.getCoachNumber()));
     }
     
+    private void getNextEvolutionForPokemon(Socket socket, int pokemonNumber) throws IOException {
+        ObjectOutputStream objectOut = new ObjectOutputStream(socket.getOutputStream());
+        Pokemon nextEvolution = getPokemonByNumber(pokemonNumber);
+        objectOut.writeObject(nextEvolution);
+    }
+    
+    private void updatePokedexForCoach(Socket socket, int coachNumber) throws IOException, ClassNotFoundException {
+        ObjectInputStream objectIn = new ObjectInputStream(socket.getInputStream());
+        Pokemon pokemon = (Pokemon) objectIn.readObject();
+        Pokemon pokemonEvolution = (Pokemon) objectIn.readObject();
+        
+        interchangeController.updateEvolution(pokemon, pokemonEvolution, coachNumber); 
+    }
+    
     public Player getPlayerByIndex (int coachNumber){
         for (Player player : playerBusiness.getPlayers()) {
             if (player.getCoachNumber() == coachNumber){
                 return player;
+            }
+        }
+        return null;
+    }
+    
+    public Pokemon getPokemonByNumber(int pokemonNumber){
+        for (Pokemon pokemon : pokemonBusiness.getPokemons()) {
+            if (pokemon.getNumber() == pokemonNumber){
+                return pokemon;
             }
         }
         return null;
@@ -172,5 +201,5 @@ public class Server extends Thread implements IConstants {
             }
         }
         return true;
-    }   
+    }         
 }
