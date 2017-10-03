@@ -80,7 +80,11 @@ public class Server extends Thread implements IConstants {
                     getNextEvolutionForPokemon(socket, pokemonNumber);
                 } else if (funcionString.equalsIgnoreCase(UPDATE_POKEDEX)){
                     int coachNumber = Integer.parseInt(recibir.readLine());
+                    System.out.println("Coach evolucion actualizar: " + coachNumber);
                     updatePokedexForCoach(socket, coachNumber);
+                } else if (funcionString.equalsIgnoreCase(REFRESH_POKEDEX)){
+                    int coachNumber = Integer.parseInt(recibir.readLine());
+                    loadPlayer(socket, coachNumber);
                 }
                 socket.close();
             } while (true);
@@ -91,7 +95,8 @@ public class Server extends Thread implements IConstants {
 
     private void createNewPlayer(Socket socket) throws IOException, JDOMException {
         System.out.println("Tara");        
-        ObjectOutputStream objectOut = new ObjectOutputStream(socket.getOutputStream());     
+        ObjectOutputStream objectOut = new ObjectOutputStream(socket.getOutputStream());  
+        System.out.println(playerBusiness.getPlayers().size());
         playerManager = new PlayerManager(playerBusiness.getPlayers().size() + 1, playerBusiness, pokemonBusiness);
         Player newPlayer = playerManager.getPlayer();
         
@@ -148,12 +153,24 @@ public class Server extends Thread implements IConstants {
         objectOut.writeObject(nextEvolution);
     }
     
-    private void updatePokedexForCoach(Socket socket, int coachNumber) throws IOException, ClassNotFoundException {
-        ObjectInputStream objectIn = new ObjectInputStream(socket.getInputStream());
-        Pokemon pokemon = (Pokemon) objectIn.readObject();
-        Pokemon pokemonEvolution = (Pokemon) objectIn.readObject();
-        
-        interchangeController.updateEvolution(pokemon, pokemonEvolution, coachNumber); 
+    private void updatePokedexForCoach(Socket socket, int coachNumber) throws IOException, ClassNotFoundException, JDOMException {
+        System.out.println("update evolution pokedex");
+        try {
+            ObjectInputStream objectIn = new ObjectInputStream(socket.getInputStream());
+            Pokemon pokemon = (Pokemon) objectIn.readObject();
+            Pokemon pokemonEvolution = (Pokemon) objectIn.readObject();
+
+            PlayerXMLBusiness playerBusiness = new PlayerXMLBusiness();
+            InterchangeController interchangeController = new InterchangeController(playerBusiness);
+            
+            interchangeController.updateEvolution(pokemon, pokemonEvolution, coachNumber); 
+            
+            ObjectOutputStream objectOut = new ObjectOutputStream(socket.getOutputStream());
+            objectOut.writeObject(1);
+        } catch (StreamCorruptedException se) {
+            ObjectOutputStream objectOut = new ObjectOutputStream(socket.getOutputStream());
+            objectOut.writeObject(0);
+        }
     }
     
     public Player getPlayerByIndex (int coachNumber){
@@ -201,5 +218,5 @@ public class Server extends Thread implements IConstants {
             }
         }
         return true;
-    }         
+    }            
 }

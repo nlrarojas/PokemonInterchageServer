@@ -38,7 +38,7 @@ public class PlayerXMLData implements IConstants {
 
     public void saveXML() throws IOException, FileNotFoundException {
         XMLOutputter xmlOutputter = new XMLOutputter();
-        xmlOutputter.output(this.document, new PrintWriter(this.filePath));
+        xmlOutputter.output(this.document, new PrintWriter(this.filePath));        
     }//guardarXML
 
     public void insertPlayer(Player player) throws IOException {

@@ -44,4 +44,5 @@ public interface IConstants {
     public static String TRADE_POKEMONS = "tradePokemons";
     public static String POKEMON_EVOLUTION = "evolution";
     public static String UPDATE_POKEDEX = "updatePokemonEvolution";
+    public static String REFRESH_POKEDEX = "refreshPokedex";
 }

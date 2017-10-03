@@ -47,8 +47,12 @@ public class InterchangeController {
     }
     
     public void updateEvolution(Pokemon pokemon, Pokemon pokemonEvolution, int coachNumber) {
+        System.out.println("cont0");
         Player player = getPlayer(coachNumber);
-        
+        System.out.println("Evolucion");
+        pokemonEvolution.setCoach(pokemon.getCoach());
+        pokemonEvolution.setOriginalCoach(pokemon.getOriginalCoach());
+        System.out.println("cont1");
         if (player != null) {
             Pokemon [] pokedex = player.getPokedex();
             for (int i = 0; i < pokedex.length; i++) {                            
@@ -57,6 +61,7 @@ public class InterchangeController {
                     break;
                 }
             }
+            System.out.println("Cont2");
             player.setPokedex(pokedex);
             players.set(playerIndex, player);
             playerBusiness.updatePokedex(coachNumber, player.getPokedex());
